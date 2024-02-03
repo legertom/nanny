@@ -22,10 +22,9 @@ const DesktopNavbar: React.FC = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const handleButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    router.push('/booking')
-  }
+  const handleButtonClick = () => {
+    router.push('/booking');
+  };
 
   return (
     <nav className='hidden md:flex md:flex-row bg-jada-green-500 px-4 sm:px-6 lg:px-8 items-center md:justify-between h-20 shadow-md'>
