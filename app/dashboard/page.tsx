@@ -10,19 +10,19 @@ export default function DashboardPage() {
   const [errors, setErrors] = useState([]);
   const [success, setSuccess] = useState(false)
 
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch('/api/home_page')
-      const data = await response.json();
-      // console.log("Output", data.home_page[0]);
-      // @ts-ignore: Suppress the warning for the next line
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const response = await fetch('/api/home_page')
+  //     const data = await response.json();
+  //     // console.log("Output", data.home_page[0]);
+  //     // @ts-ignore: Suppress the warning for the next line
 
-      setMessage(data.home_page[0])
+  //     setMessage(data.home_page[0])
 
-    }
+  //   }
 
-    fetchData()
-  }, [])
+  //   fetchData()
+  // }, [])
   const handleSubmit = async (event: React.FormEvent) => {
     // Handle the Book Jada button click
     event.preventDefault();

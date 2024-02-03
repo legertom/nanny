@@ -16,18 +16,18 @@ const HeroCard: React.FC<HeroCardProps> = ({ imageUrl, imageAlt, title, subtitle
   const messageContext = useContext(MessageData);
   const { message, setMessage } = messageContext || {};
 
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch('/api/home_page')
-      const data = await response.json();
-      // console.log("Output",data.home_page[0]);
-      // @ts-ignore: Suppress the warning for the next line
-      setMessage(data.home_page[0])
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const response = await fetch('/api/home_page')
+  //     const data = await response.json();
+  //     // console.log("Output",data.home_page[0]);
+  //     // @ts-ignore: Suppress the warning for the next line
+  //     setMessage(data.home_page[0])
 
-    }
+  //   }
 
-    fetchData()
-  },[])
+  //   fetchData()
+  // },[])
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center bg-white p-8 rounded-lg shadow-lg">

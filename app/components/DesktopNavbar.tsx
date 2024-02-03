@@ -6,6 +6,7 @@ import Button from './Button' // Your Button component
 import Link from 'next/link'
 import { useRouter, usePathname } from 'next/navigation'
 import clsx from 'clsx'
+import { MouseEvent } from 'react';
 
 const menuItems = [
   { href: '/about', label: 'About Jada' },
@@ -21,7 +22,7 @@ const DesktopNavbar: React.FC = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const handleButtonClick = (e) => {
+  const handleButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     router.push('/booking')
   }

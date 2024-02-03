@@ -28,6 +28,9 @@ const BookingPage: React.FC = () => {
     const scriptContainerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        // Capture the current value of the ref
+        const currentContainer = scriptContainerRef.current;
+
         // Create the script element
         const script = document.createElement('script');
         script.src = "https://embed.ycb.me/embed.js";
@@ -35,14 +38,14 @@ const BookingPage: React.FC = () => {
         script.setAttribute('data-domain', 'tomleger'); // Replace with your actual YouCanBook.me domain
 
         // Append the script to the container
-        if (scriptContainerRef.current) {
-            scriptContainerRef.current.appendChild(script);
+        if (currentContainer) {
+            currentContainer.appendChild(script);
         }
 
         // Cleanup function
         return () => {
-            if (scriptContainerRef.current && scriptContainerRef.current.contains(script)) {
-                scriptContainerRef.current.removeChild(script);
+            if (currentContainer && currentContainer.contains(script)) {
+                currentContainer.removeChild(script);
             }
         };
     }, []);

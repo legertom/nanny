@@ -10,17 +10,17 @@ const AboutPageDashboard = () => {
   const [errors, setErrors] = useState([]);
   const [success, setSuccess] = useState(false)
 
-  useEffect(() => {
-    async function fetchData(params:any) {
-      const response = await fetch('/api/about_page')
-      const data = await response.json();
-      console.log("Output",data);
-      setMessage(data.about_pages[0])  
+  // useEffect(() => {
+  //   async function fetchData(params:any) {
+  //     const response = await fetch('/api/about_page')
+  //     const data = await response.json();
+  //     console.log("Output",data);
+  //     setMessage(data.about_pages[0])  
   
-    }
+  //   }
   
-    fetchData()
-  },[])
+  //   fetchData()
+  // },[])
 
   const handleSubmit = async (event: React.FormEvent) => {
     // Handle the Book Jada button click
