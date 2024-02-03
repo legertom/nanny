@@ -1,19 +1,28 @@
 
-import React, { useState } from 'react';
+import React, { useState,  ChangeEvent, FormEvent } from 'react';
 
-const FAQForm = ({ onSave, initialFAQ = { question: '', answer: '' } }) => {
-  const [faq, setFaq] = useState(initialFAQ);
+interface FAQ {
+  question: string;
+  answer: string;
+}
+interface FAQFormProps {
+  onSave: (faq: FAQ) => void; // Define the type for the onSave function
+  initialFAQ?: FAQ; // Make initialFAQ optional with a default value
+}
 
-  const handleChange = (e) => {
+const FAQForm: React.FC<FAQFormProps> = ({ onSave, initialFAQ = { question: '', answer: '' } }) => {
+  const [faq, setFaq] = useState<FAQ>(initialFAQ);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFaq({ ...faq, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSave(faq);
   };
-
+  
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>

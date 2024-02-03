@@ -1,14 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
 
-const ServiceForm = ({ onSave, initialService = { title: '', description: '' } }) => {
-  const [service, setService] = useState(initialService);
+interface Service {
+  title: string;
+  description: string;
+}
 
-  const handleChange = (e) => {
+interface ServiceFormProps {
+  onSave: (service: Service) => void;
+  initialService?: Service;
+}
+
+const ServiceForm: React.FC<ServiceFormProps> = ({
+  onSave,
+  initialService = { title: '', description: '' }, // Provide default values
+}) => {
+  const [service, setService] = useState<Service>(initialService);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setService({ ...service, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSave(service);
   };

@@ -20,16 +20,16 @@ export default function RootLayout({
 }) {
   const pathname = usePathname()
  // const isLoggedIn = true; // Make this actually check if the user is logged in
- const isLoggedIn = () => {
-  return Boolean(window.localStorage.getItem('authToken'));
-};
+//  const isLoggedIn = () => {
+//   return Boolean(window.localStorage.getItem('authToken'));
+// };
   return (
     <Context>
       <html lang='en'>
         <body
           className={`${nunito.className} antialiased container-full mx-auto bg-jada-green-500`}
         >
-          {isLoggedIn && <AdminNavbar />}
+          { <AdminNavbar />}
           {!pathname.startsWith('/dashboard') && <Navbar />}
           {children}
         </body>

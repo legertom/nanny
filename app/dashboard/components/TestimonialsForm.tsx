@@ -1,15 +1,26 @@
 
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
 
-const TestimonialsForm = ({ onSave, initialTestimonial = { name: '', review: '' } }) => {
-  const [testimonial, setTestimonial] = useState(initialTestimonial);
+interface Testimonial {
+  name: string;
+  review: string;
+}
 
-  const handleChange = (e) => {
+interface TestimonialsFormProps {
+  onSave: (testimonial: Testimonial) => void;
+  initialTestimonial?: Testimonial;
+}
+
+
+const TestimonialsForm: React.FC<TestimonialsFormProps> = ({ onSave, initialTestimonial = { name: '', review: '' } }) => {
+  const [testimonial, setTestimonial] = useState<Testimonial>(initialTestimonial);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setTestimonial({ ...testimonial, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSave(testimonial);
   };

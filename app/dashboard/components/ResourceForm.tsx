@@ -1,15 +1,30 @@
 
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
 
-const ResourceForm = ({ onSave, initialResource = { title: '', url: '', description: '' } }) => {
-  const [resource, setResource] = useState(initialResource);
+interface Resource {
+  title: string;
+  url: string;
+  description: string;
+}
 
-  const handleChange = (e) => {
+interface ResourceFormProps {
+  onSave: (resource: Resource) => void;
+  initialResource?: Resource;
+}
+
+
+const ResourceForm: React.FC<ResourceFormProps> = ({
+  onSave,
+  initialResource = { title: '', url: '', description: '' },
+}) => {
+  const [resource, setResource] = useState<Resource>(initialResource);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setResource({ ...resource, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSave(resource);
   };

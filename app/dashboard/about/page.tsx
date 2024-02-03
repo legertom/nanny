@@ -1,87 +1,61 @@
-"use client"
-import { useContext, useEffect, useState } from "react"
-import { MessageData } from "../../components/Context/context"
+'use client';
+
+import { useContext, useState } from "react";
+import { MessageData } from "../../components/Context/context";
+
+interface IMessage {
+  first_para?: string;
+  second_para?: string;
+  // Add additional fields as needed
+}
 
 const AboutPageDashboard = () => {
   const messageContext = useContext(MessageData);
 
-  // Accessing message and setMessage from context
+  // Ensure that messageContext provides an object with message and setMessage
   const { message, setMessage } = messageContext || {};
-  const [errors, setErrors] = useState([]);
-  const [success, setSuccess] = useState(false)
-
-  // useEffect(() => {
-  //   async function fetchData(params:any) {
-  //     const response = await fetch('/api/about_page')
-  //     const data = await response.json();
-  //     console.log("Output",data);
-  //     setMessage(data.about_pages[0])  
-  
-  //   }
-  
-  //   fetchData()
-  // },[])
+  const [errors, setErrors] = useState<string[]>([]);
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent) => {
-    // Handle the Book Jada button click
     event.preventDefault();
-    setSuccess(false)
-    setErrors([])
-    const formData = {};
+    setSuccess(false);
+    setErrors([]);
 
     try {
       const response = await fetch("/api/about_page/1", {
         method: "PUT",
         headers: {
-          "Content-Type": "application/json", // Set the content type to JSON
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ ...message }),
       });
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
-        setSuccess(true)
-
+        setSuccess(true);
       } else {
         const errorData = await response.json();
         setErrors(errorData.errors);
       }
     } catch (error) {
-      console.error("An error occurred during signup:", error);
+      console.error("An error occurred during update:", error);
+      // Handle error state
     }
+  };
 
-  }
-  console.log("Message", message)
-
-  const changeValues = (e) => {
-    const updatedMessage = {
+  const changeValues = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const updatedMessage: IMessage = {
       ...message,
       [e.target.name]: e.target.value,
     };
-    setMessage(updatedMessage);
-  }
+    if (typeof setMessage === 'function') {
+      setMessage(updatedMessage);
+    } else {
+      console.error('setMessage is not a function');
+    }
+  };
 
-
-    // const [formData, setFormData] = useState({
-    //     paragraphOne: '',
-    //     paragraphTwo: ''
-    // });
-
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setFormData(prevState => ({
-    //         ...prevState,
-    //         [name]: value
-    //     }));
-    // };
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     // Handle the form submission logic here
-    //     // For example, sending data to a server or updating local state
-    //     console.log('Form data submitted:', formData);
-    // };
 
     return (
       <div className="flex h-screen bg-gray-100 p-10">

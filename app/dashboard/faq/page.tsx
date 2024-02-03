@@ -41,19 +41,25 @@ const initialFaqs = [
   }
 ];
 
-const DashboardFAQPage = () => {
-  const [faqs, setFaqs] = useState(initialFaqs);
-  const [editingFaq, setEditingFaq] = useState(null);
+interface Faq {
+  question: string;
+  answer: string;
+}
 
-  const handleEdit = (faq) => {
+
+const DashboardFAQPage = () => {
+  const [faqs, setFaqs] = useState<Faq[]>(initialFaqs);
+  const [editingFaq, setEditingFaq] = useState<Faq | null>(null);
+
+  const handleEdit = (faq: Faq) => {
     setEditingFaq(faq);
   };
 
-  const handleDelete = (faqQuestion) => {
+  const handleDelete = (faqQuestion: string) => {
     setFaqs(faqs.filter(f => f.question !== faqQuestion));
   };
 
-  const handleSave = (newFaq) => {
+  const handleSave = (newFaq: Faq) => {
     if (editingFaq) {
       setFaqs(faqs.map(f => f.question === editingFaq.question ? newFaq : f));
     } else {
@@ -70,7 +76,7 @@ const DashboardFAQPage = () => {
           <FAQForm onSave={handleSave} initialFAQ={editingFaq} />
         ) : (
           <button
-            onClick={() => setEditingFaq({ question: '', answer: '' })}
+            onClick={() => setEditingFaq({ question: '', answer: '' } as Faq)}
             className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mb-4"
           >
             Add New FAQ

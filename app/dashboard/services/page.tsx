@@ -46,19 +46,24 @@ const initialServices = [
   }
 ];
 
-const DashboardServicesPage = () => {
-  const [services, setServices] = useState(initialServices);
-  const [editingService, setEditingService] = useState(null);
+interface Service { 
+  title: string;
+  description: string;
+}
 
-  const handleEdit = (service) => {
+const DashboardServicesPage = () => {
+  const [services, setServices] = useState<Service[]>(initialServices);
+  const [editingService, setEditingService] = useState<Service | null>(null);
+
+  const handleEdit = (service: Service) => {
     setEditingService(service);
   };
 
-  const handleDelete = (serviceTitle) => {
+  const handleDelete = (serviceTitle: string) => {
     setServices(services.filter(service => service.title !== serviceTitle));
   };
 
-  const handleSave = (newService) => {
+  const handleSave = (newService: Service) => {
     if (editingService) {
       setServices(services.map(service => service.title === editingService.title ? newService : service));
     } else {

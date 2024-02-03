@@ -16,21 +16,24 @@ const initialTestimonials = [
     review: "We were initially anxious about finding the right care for our non-verbal daughter. Jada's expertise and gentle manner have put our worries to rest. She communicates wonderfully with our daughter, and we couldn't be happier."
   }
 ];
-
+interface Testimonial {
+  name: string;
+  review: string;
+}
 
 const DashboardTestimonialsPage = () => {
-  const [testimonials, setTestimonials] = useState(initialTestimonials);
-  const [editingTestimonial, setEditingTestimonial] = useState(null);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>(initialTestimonials);
+  const [editingTestimonial, setEditingTestimonial] = useState<Testimonial | null>(null);
 
-  const handleEdit = (testimonial) => {
+  const handleEdit = (testimonial: Testimonial) => {
     setEditingTestimonial(testimonial);
   };
 
-  const handleDelete = (testimonialName) => {
+  const handleDelete = (testimonialName: string) => {
     setTestimonials(testimonials.filter(t => t.name !== testimonialName));
   };
 
-  const handleSave = (newTestimonial) => {
+  const handleSave = (newTestimonial: Testimonial) => {
     if (editingTestimonial) {
       setTestimonials(testimonials.map(t => t.name === editingTestimonial.name ? newTestimonial : t));
     } else {

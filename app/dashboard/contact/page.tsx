@@ -1,19 +1,19 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
 
 const DashboardContactPage = () => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState<string>('');
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // Handle the form submission logic here
     // For example, sending the email address to the server
     console.log('Email to be saved:', email);
 
-    // Implement your API call to save the email address
+    // Implement API call to save the email address
   };
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
 

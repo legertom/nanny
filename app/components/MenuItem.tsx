@@ -4,7 +4,7 @@ import clsx from 'clsx';
 interface MenuItemProps {
     href: string;
     label: string;
-    isActive: boolean;
+    isActive?: boolean;
 }
 
 const MenuItem: React.FC<MenuItemProps> = ({ href, label, isActive }) => {

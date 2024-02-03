@@ -30,19 +30,28 @@ const initialResources = [
     description: "An online magazine that provides practical tips, shares life’s lessons, tackles the challenges and celebrates the joys of parenting children with special needs."
   }
 ];
-const DashboardResourcesPage = () => {
-  const [resources, setResources] = useState(initialResources);
-  const [editingResource, setEditingResource] = useState(null);
 
-  const handleEdit = (resource) => {
+interface Resource {
+
+  title: string;
+  url: string;
+  description: string;
+}
+
+
+const DashboardResourcesPage = () => {
+  const [resources, setResources] = useState<Resource[]>(initialResources);
+  const [editingResource, setEditingResource] = useState<Resource | null>(null);
+
+  const handleEdit = (resource: Resource) => {
     setEditingResource(resource);
   };
 
-  const handleDelete = (resourceId) => {
+  const handleDelete = (resourceId: string) => {
     setResources(resources.filter(resource => resource.title !== resourceId));
   };
 
-  const handleSave = (newResource) => {
+  const handleSave = (newResource: Resource) => {
     if (editingResource) {
       setResources(resources.map(resource => resource.title === editingResource.title ? newResource : resource));
     } else {
