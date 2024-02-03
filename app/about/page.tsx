@@ -17,17 +17,17 @@ export default function AboutPage() {
     const messageContext = useContext(MessageData);
     const { message, setMessage } = messageContext || {};
     
-    useEffect(() => {
-      async function fetchData(params:any) {
-        const response = await fetch('/api/about_page')
-        const data = await response.json();
-        console.log("Output",data);
-        setMessage(data.about_pages[0])  
+    // useEffect(() => {
+    //   async function fetchData(params:any) {
+    //     const response = await fetch('/api/about_page')
+    //     const data = await response.json();
+    //     console.log("Output",data);
+    //     setMessage(data.about_pages[0])  
     
-      }
+    //   }
     
-      fetchData()
-    },[])
+    //   fetchData()
+    // },[])
     return (
       <div className="container mx-auto p-4 flex flex-col md:flex-row items-center">
           <div className="flex-1">
