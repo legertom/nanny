@@ -36,8 +36,8 @@ const MobileNavbar: React.FC = () => {
       >
         <ul className='flex flex-col gap-10 text-jada-purple'>
           {menuItems.map((item) => (
-            <div onClick={closeMenu}>
-              <MenuItem key={item.href} href={item.href} label={item.label} />
+            <div  key={item.href} onClick={closeMenu}>
+              <MenuItem  href={item.href} label={item.label} />
             </div>
           ))}
         </ul>
